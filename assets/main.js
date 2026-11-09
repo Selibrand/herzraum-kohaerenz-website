@@ -70,3 +70,18 @@ document.querySelectorAll('[data-year]').forEach(function (el) { el.textContent 
   setPos(false);
   restart();
 })();
+
+// Calendly erst nach Klick laden (Datenschutz: keine Verbindung zu Calendly ohne Einwilligung)
+(function () {
+  var box = document.querySelector('[data-calendly]');
+  if (!box) return;
+  var btn = box.querySelector('[data-calendly-load]');
+  btn.addEventListener('click', function () {
+    var f = document.createElement('iframe');
+    f.src = box.getAttribute('data-calendly');
+    f.title = 'Calendly – Kostenfreies Erstgespräch buchen';
+    box.innerHTML = '';
+    box.appendChild(f);
+    f.focus();
+  });
+})();
